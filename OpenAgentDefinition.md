@@ -8,6 +8,7 @@ A comprehensive specification for building and managing Open Agent Systems—pro
 
 1. [What Is an Open Agent System?](#1-what-is-an-open-agent-system)
 2. [Core Architecture](#2-core-architecture)
+   - [The Mandatory Read Directive](#critical-the-mandatory-read-directive) ← **Most important requirement**
 3. [Folder Structure](#3-folder-structure)
 4. [Agent File Anatomy](#4-agent-file-anatomy)
    - [Agent-Created Tools](#agent-created-tools)
@@ -81,6 +82,38 @@ Open Agent Systems use a three-layer architecture:
 │  (Full agent definitions - loaded when triggered)        │
 └─────────────────────────────────────────────────────────┘
 ```
+
+### Critical: The Mandatory Read Directive
+
+**This is the most important requirement of the entire system.**
+
+Each entry point file (CLAUDE.md, AGENTS.md, GEMINI.md) MUST include a read directive at the top. Without this, the agent system won't function.
+
+#### Required Format
+
+```markdown
+**CRITICAL: Read `open-agents/INSTRUCTIONS.md` immediately.**
+```
+
+That's it. One line. The AI will read the file and understand the system.
+
+#### Creating Entry Point Files
+
+When setting up an Open Agent System, **always create entry point files if they don't exist**:
+
+- `CLAUDE.md` — for Claude Code
+- `AGENTS.md` — for Codex
+- `GEMINI.md` — for Gemini CLI
+
+Since you're already creating `.claude/commands/` and `.gemini/commands/` folders, create these files too. A minimal entry point file is just:
+
+```markdown
+**CRITICAL: Read `open-agents/INSTRUCTIONS.md` immediately.**
+```
+
+If the project already has these files, add the directive at the top.
+
+---
 
 ### Why This Pattern?
 
@@ -950,42 +983,16 @@ Add agents to `open-agents/agents/` following the template in [Section 4](#4-age
 
 Add commands to `.claude/commands/{domain}/` and `.gemini/commands/{domain}/`.
 
-#### Step 6: Augment existing entry point files
+#### Step 6: Create or update entry point files
 
-**If CLAUDE.md exists**, append:
+Create these files if they don't exist, or add the directive to the top if they do:
 
+**CLAUDE.md, AGENTS.md, GEMINI.md:**
 ```markdown
----
-
-## Open Agents
-
-This project includes an Open Agent System. See `open-agents/README.md` for an overview.
-
-**Full documentation:** `open-agents/INSTRUCTIONS.md`
-
-| Agent | Trigger | Output |
-|-------|---------|--------|
-| Researcher | "research [topic]" | `open-agents/output-articles/` |
-| Transformer | "transform [file]" | `open-agents/output-html/` |
+**CRITICAL: Read `open-agents/INSTRUCTIONS.md` immediately.**
 ```
 
-**If CLAUDE.md doesn't exist**, create it:
-
-```markdown
-# Project Instructions for Claude
-
-**This project includes an Open Agent System.**
-
-Read `open-agents/INSTRUCTIONS.md` for available agents and how to use them.
-
-## Quick Reference
-
-| Agent | Trigger | Output |
-|-------|---------|--------|
-| Researcher | "research [topic]" | `open-agents/output-articles/` |
-```
-
-Repeat for `AGENTS.md` and `GEMINI.md`.
+That's the minimum requirement. Optionally add a quick reference table below for convenience.
 
 ### What NOT to Do
 
@@ -1051,20 +1058,12 @@ my-existing-project/
     └── output-data/
 ```
 
-#### Entry Point Augmentation (CLAUDE.md)
+#### Entry Point File (CLAUDE.md)
 
 ```markdown
-# My Existing Project – Instructions for Claude
+**CRITICAL: Read `open-agents/INSTRUCTIONS.md` immediately.**
 
-[... existing project instructions ...]
-
----
-
-## Open Agents
-
-This project includes an **Open Agent System** for historical research.
-
-**Full documentation:** `open-agents/INSTRUCTIONS.md`
+[... any existing project instructions ...]
 
 ### Quick Reference
 
@@ -1200,7 +1199,9 @@ An Open Agent System consists of:
 4. **Agent definitions** (`agents/*.md`) that define specialized behaviors
 5. **Commands** (`.claude/commands/`, `.gemini/commands/`) for explicit invocation
 6. **Structured folders** (`source/`, `output-*/`) for organized workflow
-7. **Augmented entry points** that integrate with existing project files
+7. **Entry point files** (CLAUDE.md, AGENTS.md, GEMINI.md) with the read directive
+
+**Critical:** Entry points must contain `**CRITICAL: Read `open-agents/INSTRUCTIONS.md` immediately.**` at the top. Create these files if they don't exist.
 
 The pattern enables:
 - **Tool agnosticism:** Works with Claude Code, Gemini CLI, Codex
@@ -1209,9 +1210,9 @@ The pattern enables:
 - **Non-disruptive integration:** Adds to existing projects without conflict
 - **Self-modification:** Can add, edit, and remove agents
 
-To create a new system: `open-agents/` folder → README → INSTRUCTIONS → agents → commands → augment entry points.
+To create a new system: `open-agents/` folder → README → INSTRUCTIONS → agents → commands → augment entry points with mandatory read directive.
 
-To add to existing project: create `open-agents/`, augment existing `CLAUDE.md`/`AGENTS.md`/`GEMINI.md`.
+To add to existing project: create `open-agents/`, add mandatory read directive to `CLAUDE.md`/`AGENTS.md`/`GEMINI.md`.
 
 ---
 
