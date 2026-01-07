@@ -1,0 +1,3 @@
+[submodule "ai-dev-tasks"]
+	path = ai-dev-tasks
+	url = https://github.com/FutureTranz-Inc/ai-dev-tasks.git
