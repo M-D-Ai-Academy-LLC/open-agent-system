@@ -11,6 +11,7 @@ import { runCommand } from './commands/run.js';
 import { chatCommand } from './commands/chat.js';
 import { configCommand } from './commands/config.js';
 import { agentCommand } from './commands/agent.js';
+import { toolsCommand } from './commands/tools.js';
 
 export function createCli(): Command {
   const program = new Command();
@@ -26,8 +27,9 @@ export function createCli(): Command {
   program.addCommand(chatCommand());
   program.addCommand(configCommand());
   program.addCommand(agentCommand());
+  program.addCommand(toolsCommand());
 
   return program;
 }
 
-export { initCommand, runCommand, chatCommand, configCommand, agentCommand };
+export { initCommand, runCommand, chatCommand, configCommand, agentCommand, toolsCommand };
