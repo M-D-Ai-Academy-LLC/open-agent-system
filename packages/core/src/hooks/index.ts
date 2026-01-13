@@ -20,3 +20,6 @@ export {
 
 // Gateway Hooks (#1-7)
 export * from './gateway/index.js';
+
+// Auth Hooks (#8-14)
+export * from './auth/index.js';
