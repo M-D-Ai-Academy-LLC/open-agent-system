@@ -1,0 +1,56 @@
+{
+  "name": "@open-agent/adapter-openrouter",
+  "version": "0.1.0",
+  "description": "OpenRouter adapter for Open Agent System - access 300+ LLM models",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "clean": "rm -rf dist coverage .turbo"
+  },
+  "dependencies": {
+    "@open-agent/core": "workspace:*",
+    "@openrouter/sdk": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  },
+  "peerDependencies": {
+    "@openrouter/sdk": ">=0.1.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "llm",
+    "ai",
+    "openrouter",
+    "adapter",
+    "multi-model"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-agent-system/open-agent-system.git",
+    "directory": "packages/adapters/openrouter"
+  }
+}

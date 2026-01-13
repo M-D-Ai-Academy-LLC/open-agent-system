@@ -1,0 +1,64 @@
+{
+  "name": "@open-agent/cli",
+  "version": "0.1.0",
+  "description": "CLI for building and running LLM-agnostic multi-agent systems",
+  "type": "module",
+  "bin": {
+    "open-agent": "./dist/bin.js",
+    "oas": "./dist/bin.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "node dist/bin.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "clean": "rm -rf dist coverage .turbo"
+  },
+  "dependencies": {
+    "@open-agent/core": "workspace:*",
+    "@openrouter/sdk": "^0.1.0",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.0",
+    "inquirer": "^9.2.0",
+    "ora": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": [
+    "llm",
+    "ai",
+    "agents",
+    "cli",
+    "openrouter"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/open-agent-system/open-agent-system.git",
+    "directory": "packages/cli"
+  }
+}

@@ -1,0 +1,183 @@
+/**
+ * @open-agent/core
+ *
+ * Core framework for building LLM-agnostic multi-agent systems.
+ * Provides a 50-hook extensibility system for complete control over
+ * agent behavior, routing, security, and observability.
+ */
+
+// Hook System
+export {
+  HookRegistry,
+  getHookRegistry,
+  resetHookRegistry,
+  HOOK_NAMES,
+  type HookName,
+  HookPipeline,
+  createPipeline,
+  createRequestPipeline,
+  createResponsePipeline,
+  createToolPipeline,
+} from './hooks/index.js';
+
+// Types
+export type {
+  // Base Types
+  HookPriority,
+  HookMetadata,
+  HookCategory,
+  HookResult,
+  HookHandler,
+  HookContext,
+
+  // Gateway Hooks (#1-7)
+  RequestTransformInput,
+  RequestTransformOutput,
+  ResponseTransformInput,
+  ResponseTransformOutput,
+  ModelSelectionInput,
+  ModelSelectionOutput,
+  ProviderRoutingInput,
+  ProviderRoutingOutput,
+  FallbackTriggerInput,
+  FallbackTriggerOutput,
+  RetryDecisionInput,
+  RetryDecisionOutput,
+  CircuitBreakerInput,
+  CircuitBreakerOutput,
+
+  // Auth Hooks (#8-14)
+  ApiKeyValidationInput,
+  ApiKeyValidationOutput,
+  ApiKeyRotationInput,
+  ApiKeyRotationOutput,
+  PermissionCheckInput,
+  PermissionCheckOutput,
+  RateLimitInput,
+  RateLimitOutput,
+  QuotaCheckInput,
+  QuotaCheckOutput,
+  SessionValidationInput,
+  SessionValidationOutput,
+  AuditLogInput,
+  AuditLogOutput,
+
+  // Tool Calling Hooks (#15-21)
+  ToolRegistrationInput,
+  ToolRegistrationOutput,
+  ToolValidationInput,
+  ToolValidationOutput,
+  ToolExecutionInput,
+  ToolExecutionOutput,
+  ToolResultTransformInput,
+  ToolResultTransformOutput,
+  ToolErrorRecoveryInput,
+  ToolErrorRecoveryOutput,
+  McpToolDiscoveryInput,
+  McpToolDiscoveryOutput,
+  ToolSandboxInput,
+  ToolSandboxOutput,
+
+  // Agent Lifecycle Hooks (#22-28)
+  AgentInitInput,
+  AgentInitOutput,
+  AgentSpawnInput,
+  AgentSpawnOutput,
+  AgentTerminationInput,
+  AgentTerminationOutput,
+  StateTransitionInput,
+  StateTransitionOutput,
+  MessagePassingInput,
+  MessagePassingOutput,
+  TaskDelegationInput,
+  TaskDelegationOutput,
+  AgentHealthCheckInput,
+  AgentHealthCheckOutput,
+
+  // Streaming Hooks (#29-35)
+  StreamStartInput,
+  StreamStartOutput,
+  ChunkProcessInput,
+  ChunkProcessOutput,
+  StreamCompleteInput,
+  StreamCompleteOutput,
+  StreamErrorInput,
+  StreamErrorOutput,
+  BackpressureInput,
+  BackpressureOutput,
+  StreamMultiplexInput,
+  StreamMultiplexOutput,
+  PartialResultInput,
+  PartialResultOutput,
+
+  // Observability Hooks (#36-42)
+  MetricCollectionInput,
+  MetricCollectionOutput,
+  TraceStartInput,
+  TraceStartOutput,
+  SpanAnnotationInput,
+  SpanAnnotationOutput,
+  LogEnrichmentInput,
+  LogEnrichmentOutput,
+  AlertTriggerInput,
+  AlertTriggerOutput,
+  CostTrackingInput,
+  CostTrackingOutput,
+  PerformanceProfilingInput,
+  PerformanceProfilingOutput,
+
+  // Security Hooks (#43-50)
+  InputSanitizationInput,
+  InputSanitizationOutput,
+  OutputFilteringInput,
+  OutputFilteringOutput,
+  PiiDetectionInput,
+  PiiDetectionOutput,
+  PromptInjectionInput,
+  PromptInjectionOutput,
+  ContentModerationInput,
+  ContentModerationOutput,
+  DataEncryptionInput,
+  DataEncryptionOutput,
+  ComplianceCheckInput,
+  ComplianceCheckOutput,
+  ThreatDetectionInput,
+  ThreatDetectionOutput,
+
+  // Supporting Types
+  Message,
+  ToolDefinition,
+  LLMResponse,
+  ToolCall,
+  TokenUsage,
+  ModelInfo,
+  ModelConstraints,
+  ProviderInfo,
+  ProviderPreferences,
+  FailureRecord,
+  ValidationError,
+  McpServerInfo,
+  ResourceLimits,
+  AgentConfig,
+  AgentState,
+  AgentMessage,
+  TaskDefinition,
+  AgentSelectionCriteria,
+  HealthMetrics,
+  StreamChunk,
+  StreamMetrics,
+  SanitizationRule,
+  SanitizationModification,
+  OutputFilter,
+  Redaction,
+  PiiType,
+  PiiMatch,
+  ModerationCategory,
+  ModerationViolation,
+  ComplianceViolation,
+  ActivityLog,
+  ThreatPattern,
+} from './types/index.js';
+
+// Version
+export const VERSION = '0.1.0';

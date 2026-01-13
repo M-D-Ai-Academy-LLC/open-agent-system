@@ -1,13 +1,46 @@
-# OS files
-.DS_Store
-Thumbs.db
+# Dependencies
+node_modules/
+.pnpm-store/
 
-# Editor directories
+# Build outputs
+dist/
+*.tsbuildinfo
+
+# IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+.DS_Store
 
-# Environment files
+# Environment
 .env
 .env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Turbo
+.turbo/
+
+# State/Cache
+.open-agent/
+*.db
+*.sqlite
+
+# OS
+Thumbs.db
+
+# Secrets (never commit)
+*.pem
+*.key
+credentials.json
+secrets.yaml
