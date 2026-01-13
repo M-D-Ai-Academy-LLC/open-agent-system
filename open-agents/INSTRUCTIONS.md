@@ -111,6 +111,141 @@ When a user request comes in, use this logic to determine the appropriate agent:
 3. **Ambiguous requests**: Ask user to clarify which agent to use
 4. **Multi-agent tasks**: Break into subtasks, route each separately
 
+## Agent Chaining
+
+Chain multiple agents together for complex workflows where the output of one agent feeds into the next.
+
+### Chain Syntax
+
+Use the arrow operator (`→` or `->`) to chain agents:
+
+```
+/agents/chain research "AI trends" → transform to HTML → publish
+```
+
+Or in natural language:
+
+```
+Research AI trends, then transform to HTML, then publish to reports
+```
+
+### Chain Patterns
+
+| Pattern | Agents | Use Case |
+|---------|--------|----------|
+| Research Pipeline | Researcher → Reviewer → Publisher | Verified research output |
+| Content Pipeline | Researcher → Transformer → Publisher | Format and deploy research |
+| Document Pipeline | Coding → Reviewer → Publisher | Code documentation |
+| Quality Pipeline | [Any] → Reviewer → [Edit] → Publisher | QA-gated publishing |
+
+### Chain Triggers
+
+Recognize chains when:
+- Arrow operators: `→`, `->`, `then`, `and then`
+- Sequential verbs: "research and publish", "transform then review"
+- Pipeline keywords: "pipeline", "workflow", "sequence"
+
+### Example Chains
+
+**Research to Publication:**
+```
+/agents/chain research "market trends" → review → transform to PDF → publish
+```
+
+**Content Production:**
+```
+/agents/chain source/topic.stub.md → research → review → publish to newsletter
+```
+
+**Quality Gate:**
+```
+/agents/chain output-drafts/report.md → review --gate → publish
+```
+
+### Chain Execution
+
+When executing a chain:
+
+1. **Parse the chain** - Identify agents and their inputs
+2. **Execute sequentially** - Run each agent in order
+3. **Pass outputs** - Each agent's output becomes next agent's input
+4. **Track status** - Log each step's result
+5. **Handle errors** - Stop chain on failure, report status
+
+### Chain Status Tracking
+
+Chain progress is logged to `open-agents/logs/chain-YYYY-MM-DD.log`:
+
+```json
+{
+  "chain_id": "chain-2025-01-13-001",
+  "started": "2025-01-13T10:00:00Z",
+  "steps": [
+    {
+      "agent": "Researcher",
+      "input": "AI trends",
+      "output": "output-drafts/2025-01-13-ai-trends-research-v1.md",
+      "status": "completed",
+      "timestamp": "2025-01-13T10:05:00Z"
+    },
+    {
+      "agent": "Transformer",
+      "input": "output-drafts/2025-01-13-ai-trends-research-v1.md",
+      "output": "output-drafts/2025-01-13-ai-trends-research.html",
+      "status": "completed",
+      "timestamp": "2025-01-13T10:06:00Z"
+    },
+    {
+      "agent": "Publisher",
+      "input": "output-drafts/2025-01-13-ai-trends-research.html",
+      "output": "/shared/reports/ai-trends.html",
+      "status": "completed",
+      "timestamp": "2025-01-13T10:07:00Z"
+    }
+  ],
+  "status": "completed",
+  "finished": "2025-01-13T10:07:00Z"
+}
+```
+
+### Chain Error Handling
+
+When a chain step fails:
+
+1. **Stop execution** - Don't proceed to next step
+2. **Log failure** - Record error in chain log
+3. **Report status** - Show which step failed and why
+4. **Preserve partial output** - Keep successful step outputs
+5. **Suggest recovery** - Recommend how to fix and resume
+
+**Error Report Format:**
+```markdown
+## Chain Failed
+
+**Chain:** research → transform → publish
+**Failed At:** Step 2 (Transformer)
+**Error:** Invalid input format
+
+### Completed Steps
+1. ✅ Researcher - output-drafts/research.md
+
+### Failed Step
+2. ❌ Transformer - Expected markdown, got invalid input
+
+### Recovery Options
+- Fix input file and retry: `/agents/chain --resume chain-2025-01-13-001`
+- Skip failed step: `/agents/chain --skip transform ...`
+- Restart chain: `/agents/chain ...`
+```
+
+### Resume Interrupted Chains
+
+If a chain is interrupted, resume from the last successful step:
+
+```
+/agents/chain --resume chain-2025-01-13-001
+```
+
 ## Git Commit Protocol
 
 All changes to this system should follow these commit conventions:
