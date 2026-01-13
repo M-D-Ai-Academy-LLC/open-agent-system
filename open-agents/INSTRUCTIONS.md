@@ -354,6 +354,102 @@ Summarize source/quarterly-report.pdf and extract key metrics
 
 See `source/README.md` for detailed documentation and examples.
 
+## Output Stage Pipeline
+
+Outputs flow through three stages from initial creation to final approval:
+
+```
+output-drafts/ → output-refined/ → output-final/
+     (v1)            (v2, v3)         (final)
+```
+
+### Stage Descriptions
+
+| Stage | Purpose | Quality Level | Who Reviews |
+|-------|---------|---------------|-------------|
+| `output-drafts/` | First-pass outputs | Raw, unreviewed | Human reviewer |
+| `output-refined/` | Improved iterations | Reviewed, polished | Stakeholders |
+| `output-final/` | Approved deliverables | Production-ready | N/A (complete) |
+
+### Output Naming Conventions
+
+All outputs follow this pattern:
+
+```
+YYYY-MM-DD-description-vN.ext
+```
+
+**Components:**
+- `YYYY-MM-DD`: Date work started
+- `description`: Kebab-case description
+- `vN`: Version number (v1, v2, etc.)
+- `.ext`: Appropriate file extension
+
+**Examples:**
+```
+output-drafts/2025-01-13-market-report-v1.md
+output-refined/2025-01-13-market-report-v2.md
+output-final/2025-01-13-market-report-v3.md
+```
+
+### Stage Promotion Guidelines
+
+#### Drafts → Refined
+
+Promote when:
+- [x] Initial review complete
+- [x] Major issues addressed
+- [x] Basic quality standards met
+
+```bash
+# Review, edit, then promote
+mv output-drafts/2025-01-13-report-v1.md output-refined/2025-01-13-report-v2.md
+```
+
+#### Refined → Final
+
+Promote when:
+- [x] All feedback addressed
+- [x] Quality checklist passed
+- [x] Stakeholder approval (if needed)
+- [x] Ready for distribution
+
+```bash
+# After final approval
+mv output-refined/2025-01-13-report-v3.md output-final/2025-01-13-report-final.md
+```
+
+### Quality Checklist
+
+Before promoting to `output-final/`:
+
+1. **Content**: All requirements from source request met
+2. **Accuracy**: Facts verified, no errors
+3. **Clarity**: Well-organized, easy to understand
+4. **Formatting**: Consistent, professional appearance
+5. **Completeness**: No missing sections or placeholders
+6. **Audience**: Appropriate for intended readers
+
+### Iteration Workflow
+
+For complex deliverables:
+
+```
+Request → Draft v1 → Review → Refined v2 → Review → Refined v3 → Approval → Final
+```
+
+Keep versions sequential. If major rework needed, increment version in current stage rather than going backward.
+
+### Cleanup Policy
+
+| Stage | Retention | Action |
+|-------|-----------|--------|
+| Drafts | Delete after promotion | Or archive after 30 days |
+| Refined | Delete superseded versions | Keep latest until final |
+| Final | Keep indefinitely | Archive when replaced |
+
+See individual folder READMEs for detailed documentation.
+
 ## Emergency Procedures
 
 ### Agent Conflict
