@@ -78,6 +78,7 @@ open-agents/
 |-------|------|-------------|----------|
 | Project Assistant | `agents/project-assistant.md` | Codebase navigation, feature backlog management, progress tracking | "what does this do", "show progress", "add a feature", "what should I work on" |
 | Initializer | `agents/initializer.md` | Sets up new projects from app_spec.txt, creates feature backlog | "initialize project", "set up from spec", "create features from spec" |
+| Coding | `agents/coding.md` | Implements features with verification, drives autonomous development | "implement next feature", "start coding", "build the [feature]", "continue development" |
 
 ## Routing Logic
 
