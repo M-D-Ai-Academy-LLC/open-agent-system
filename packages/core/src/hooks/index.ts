@@ -17,3 +17,6 @@ export {
   createResponsePipeline,
   createToolPipeline,
 } from './pipeline.js';
+
+// Gateway Hooks (#1-7)
+export * from './gateway/index.js';
