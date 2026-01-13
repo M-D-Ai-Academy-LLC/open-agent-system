@@ -35,3 +35,6 @@ export * from './streaming/index.js';
 
 // Observability Hooks (#36-42)
 export * from './observability/index.js';
+
+// Security Hooks (#43-50)
+export * from './security/index.js';
