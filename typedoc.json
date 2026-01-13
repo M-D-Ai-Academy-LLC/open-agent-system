@@ -1,0 +1,75 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "Open Agent System",
+  "entryPoints": [
+    "packages/core/src/index.ts",
+    "packages/cli/src/index.ts",
+    "packages/adapters/openrouter/src/index.ts",
+    "packages/adapters/anthropic/src/index.ts",
+    "packages/adapters/openai/src/index.ts"
+  ],
+  "entryPointStrategy": "expand",
+  "out": "docs/api",
+  "readme": "README.md",
+  "includeVersion": true,
+  "categorizeByGroup": true,
+  "categoryOrder": [
+    "Core",
+    "Hooks",
+    "Pipeline",
+    "Runtime",
+    "Tools",
+    "CLI",
+    "Adapters",
+    "*"
+  ],
+  "groupOrder": [
+    "Classes",
+    "Interfaces",
+    "Type Aliases",
+    "Functions",
+    "Variables",
+    "*"
+  ],
+  "navigation": {
+    "includeCategories": true,
+    "includeGroups": true
+  },
+  "visibilityFilters": {
+    "protected": true,
+    "@internal": false
+  },
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/tests/**"
+  ],
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "excludeExternals": true,
+  "sort": ["source-order", "alphabetical"],
+  "kindSortOrder": [
+    "Class",
+    "Interface",
+    "TypeAlias",
+    "Function",
+    "Variable",
+    "Enum",
+    "Module"
+  ],
+  "plugin": [],
+  "searchInComments": true,
+  "cleanOutputDir": true,
+  "validation": {
+    "notExported": true,
+    "invalidLink": true,
+    "notDocumented": false
+  },
+  "treatWarningsAsErrors": false,
+  "hideGenerator": false,
+  "customCss": "",
+  "lightHighlightTheme": "github-light",
+  "darkHighlightTheme": "github-dark"
+}
