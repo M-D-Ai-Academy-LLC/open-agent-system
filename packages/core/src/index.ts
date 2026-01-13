@@ -179,5 +179,30 @@ export type {
   ThreatPattern,
 } from './types/index.js';
 
+// Runtime System
+export {
+  AgentRuntime,
+  createRuntime,
+  DefaultStateManager,
+  createStateManager,
+  DefaultToolExecutor,
+  createToolExecutor,
+  DefaultMessageQueue,
+  createMessageQueue,
+  DEFAULT_RUNTIME_CONFIG,
+  type RuntimeConfig,
+  type RuntimeEvents,
+  type AgentInstance,
+  type LLMAdapter,
+  type CompletionOptions,
+  type ToolExecutor,
+  type ToolExecutionContext,
+  type ToolExecutionResult,
+  type ToolHandler,
+  type MessageQueue,
+  type StateManager,
+  type Runtime,
+} from './runtime/index.js';
+
 // Version
 export const VERSION = '0.1.0';
