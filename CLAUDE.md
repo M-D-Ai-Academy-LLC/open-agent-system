@@ -157,11 +157,19 @@ Enterprise workflow templates for structured development:
 
 | Agent | Description | Triggers |
 |-------|-------------|----------|
-| *None yet* | *Agents are defined in `open-agents/agents/`* | *See INSTRUCTIONS.md* |
+| Project Assistant | Codebase navigation, backlog management, progress tracking | "what does this do", "show progress", "add a feature" |
+| Initializer | Sets up new projects from app_spec.txt | "initialize project", "create from spec" |
+| Coding | Implements features with verification workflow | "implement next", "start coding", "build the [feature]" |
 
 > **Note:** See `open-agents/INSTRUCTIONS.md` for the full agent catalog and routing logic.
 
 ## Available Commands
+
+### Agent Commands
+- `/agents/list` - List all available agents
+- `/agents/init` - Initialize project from app_spec.txt
+- `/agents/code` - Start coding session for next feature
+- `/agents/status` - Show feature completion status
 
 ### Feature Management (MCP Tools)
 - `feature_get_stats` - Get current progress (passing/total)
