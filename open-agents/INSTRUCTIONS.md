@@ -88,11 +88,14 @@ When a user request comes in, use this logic to determine the appropriate agent:
 
 | Task Type | Signals | Route To |
 |-----------|---------|----------|
+| Navigation | "what does this do", "show progress", "where is", "explain" | Project Assistant |
+| Initialization | "initialize", "set up", "create from spec", "start new project" | Initializer |
+| Development | "implement", "build", "code", "fix", "continue development" | Coding Agent |
+| Backlog | "add feature", "what should I work on", "feature status" | Project Assistant |
 | Research | "find", "search", "what is", "summarize" | Research Agent |
 | Document | "write", "draft", "edit", "format" | Editor Agent |
 | Organization | "sort", "organize", "categorize", "file" | Organizer Agent |
 | Analysis | "analyze", "compare", "evaluate" | Analyst Agent |
-| Technical | "code", "debug", "implement", "build" | Developer Agent |
 
 ### Routing Rules
 
