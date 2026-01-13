@@ -82,6 +82,7 @@ open-agents/
 | Researcher | `agents/researcher.md` | Gathers information from web and documents, produces research articles | "research [topic]", "find information about", "summarize", "compare", "investigate" |
 | Transformer | `agents/transformer.md` | Converts content between formats (markdown to HTML, JSON to CSV, etc.) | "convert [file] to [format]", "transform", "export as", "reformat" |
 | Publisher | `agents/publisher.md` | Prepares and publishes final outputs to designated locations | "publish", "deploy", "distribute", "release", "finalize" |
+| Reviewer | `agents/reviewer.md` | Reviews content and provides structured feedback | "review", "give feedback", "evaluate", "critique", "proofread" |
 
 ## Routing Logic
 
@@ -98,6 +99,7 @@ When a user request comes in, use this logic to determine the appropriate agent:
 | Research | "find", "search", "what is", "summarize", "research", "investigate" | Researcher |
 | Transformation | "convert", "transform", "export as", "reformat", "migrate format" | Transformer |
 | Publication | "publish", "deploy", "distribute", "release", "finalize" | Publisher |
+| Review | "review", "give feedback", "evaluate", "critique", "proofread", "check for issues" | Reviewer |
 | Document | "write", "draft", "edit", "format" | Editor Agent |
 | Organization | "sort", "organize", "categorize", "file" | Organizer Agent |
 | Analysis | "analyze", "compare", "evaluate" | Analyst Agent |
