@@ -1,3 +1,5 @@
+**CRITICAL: Read `open-agents/INSTRUCTIONS.md` immediately.**
+
 # CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
@@ -150,3 +152,26 @@ Enterprise workflow templates for structured development:
 - Include in message: what changed, test status, feature ID
 - Update `claude-progress.txt` before session ends
 - Never commit with uncommitted changes or broken features
+
+## Quick Reference: Available Agents
+
+| Agent | Description | Triggers |
+|-------|-------------|----------|
+| *None yet* | *Agents are defined in `open-agents/agents/`* | *See INSTRUCTIONS.md* |
+
+> **Note:** See `open-agents/INSTRUCTIONS.md` for the full agent catalog and routing logic.
+
+## Available Commands
+
+### Feature Management (MCP Tools)
+- `feature_get_stats` - Get current progress (passing/total)
+- `feature_get_next` - Get next feature to work on
+- `feature_mark_in_progress` - Claim a feature
+- `feature_mark_passing` - Mark feature complete
+- `feature_skip` - Skip feature (external blockers only)
+
+### ai-dev-tasks Commands
+- `/create-prd` - Create Product Requirement Document
+- `/generate-tasks` - Generate tasks from PRD
+- `/process-task-list` - Process pending tasks
+- `/log-task` - Log completed task
