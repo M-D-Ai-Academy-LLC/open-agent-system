@@ -32,3 +32,6 @@ export * from './agent/index.js';
 
 // Streaming Hooks (#29-35)
 export * from './streaming/index.js';
+
+// Observability Hooks (#36-42)
+export * from './observability/index.js';
