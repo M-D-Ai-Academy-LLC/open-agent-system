@@ -72,11 +72,11 @@ open-agents/
 - One-line description
 - Trigger keywords/phrases
 
-### Placeholder Agent List
+### Available Agent Catalog
 
 | Agent | File | Description | Triggers |
 |-------|------|-------------|----------|
-| *Coming soon* | `agents/*.md` | *Agents will be documented here* | *Keywords* |
+| Project Assistant | `agents/project-assistant.md` | Codebase navigation, feature backlog management, progress tracking | "what does this do", "show progress", "add a feature", "what should I work on" |
 
 ## Routing Logic
 
