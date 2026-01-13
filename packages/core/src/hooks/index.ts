@@ -29,3 +29,6 @@ export * from './tools/index.js';
 
 // Agent Lifecycle Hooks (#22-28)
 export * from './agent/index.js';
+
+// Streaming Hooks (#29-35)
+export * from './streaming/index.js';
