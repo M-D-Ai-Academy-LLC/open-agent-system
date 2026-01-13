@@ -275,6 +275,85 @@ echo "42"
 
 See `tools/README.md` for detailed documentation.
 
+## Source Folder Usage
+
+The `source/` folder contains input files for agent processing. This is where you place materials that agents will transform, analyze, or organize.
+
+### Workflow
+
+```
+source/ (input) → agent processing → output-drafts/ → output-refined/ → output-final/
+```
+
+### File Types
+
+| Type | Extension | Purpose |
+|------|-----------|---------|
+| Direct Input | Any | Raw files needing processing |
+| Stub Files | `.stub.md` | Lightweight requests pointing to sources |
+| Request Files | `.request.md` | Detailed work orders with full instructions |
+
+### When to Use Each Type
+
+**Direct Input Files**: Just drop files that need processing
+```
+source/quarterly-report.pdf
+source/customer-data.csv
+```
+
+**Stub Files**: For simple requests with external sources
+```markdown
+<!-- source/summary.stub.md -->
+## Source
+- File: `source/quarterly-report.pdf`
+
+## Request
+Summarize key findings in 1 page.
+
+## Output
+- Format: Markdown
+- Audience: Executive team
+```
+
+**Request Files**: For complex tasks with detailed requirements
+```markdown
+<!-- source/analysis.request.md -->
+## Objective
+Comprehensive competitor analysis
+
+## Requirements
+1. Feature comparison matrix
+2. Pricing analysis
+3. SWOT for each competitor
+
+## Deliverables
+- Main report (markdown)
+- Comparison table (CSV)
+```
+
+### Naming Conventions
+
+- Use descriptive names: `customer-feedback-q1.csv`
+- Date prefix for time-sensitive: `2025-01-13-meeting-notes.md`
+- Kebab-case: `product-roadmap-v2.md`
+- Type suffixes: `.stub.md`, `.request.md`
+
+### Processing Source Files
+
+Tell an agent to process files by referencing them:
+
+```
+Process source/market-research.stub.md
+```
+
+Or directly:
+
+```
+Summarize source/quarterly-report.pdf and extract key metrics
+```
+
+See `source/README.md` for detailed documentation and examples.
+
 ## Emergency Procedures
 
 ### Agent Conflict
