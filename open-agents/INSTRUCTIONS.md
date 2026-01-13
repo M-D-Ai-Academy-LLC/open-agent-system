@@ -80,6 +80,7 @@ open-agents/
 | Initializer | `agents/initializer.md` | Sets up new projects from app_spec.txt, creates feature backlog | "initialize project", "set up from spec", "create features from spec" |
 | Coding | `agents/coding.md` | Implements features with verification, drives autonomous development | "implement next feature", "start coding", "build the [feature]", "continue development" |
 | Researcher | `agents/researcher.md` | Gathers information from web and documents, produces research articles | "research [topic]", "find information about", "summarize", "compare", "investigate" |
+| Transformer | `agents/transformer.md` | Converts content between formats (markdown to HTML, JSON to CSV, etc.) | "convert [file] to [format]", "transform", "export as", "reformat" |
 
 ## Routing Logic
 
@@ -94,6 +95,7 @@ When a user request comes in, use this logic to determine the appropriate agent:
 | Development | "implement", "build", "code", "fix", "continue development" | Coding Agent |
 | Backlog | "add feature", "what should I work on", "feature status" | Project Assistant |
 | Research | "find", "search", "what is", "summarize", "research", "investigate" | Researcher |
+| Transformation | "convert", "transform", "export as", "reformat", "migrate format" | Transformer |
 | Document | "write", "draft", "edit", "format" | Editor Agent |
 | Organization | "sort", "organize", "categorize", "file" | Organizer Agent |
 | Analysis | "analyze", "compare", "evaluate" | Analyst Agent |
