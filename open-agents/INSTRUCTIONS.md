@@ -205,6 +205,76 @@ Where to place outputs: `output-drafts/`, `output-refined/`, or `output-final/`
 3. Remove routing keywords
 4. Commit with `chore(agents): remove agent-name`
 
+## Tool Creation Guidelines
+
+Agents can create custom tools (scripts) to extend their capabilities. All tools go in the `tools/` directory.
+
+### When to Create a Tool
+
+Create a tool when you need to:
+- Perform an operation repeatedly across tasks
+- Integrate with an external API or service
+- Process data in a way the LLM cannot directly
+- Execute system commands safely and consistently
+
+### Tool Naming Conventions
+
+| Rule | Example | Description |
+|------|---------|-------------|
+| Use verb-noun format | `fetch-url.py` | Describes the action |
+| Lowercase only | `parse-json.mjs` | Consistent casing |
+| Use hyphens | `git-summary.sh` | Not underscores |
+| Be descriptive | `convert-markdown-to-html.py` | Clear purpose |
+
+### Creating a Tool
+
+1. **Choose the right language**:
+   - `.sh` - Simple bash scripts for CLI operations
+   - `.py` - Python for complex logic or APIs
+   - `.mjs` - Node.js for web-related tasks
+
+2. **Use the templates**:
+   - Copy from `tools/template.sh` or `tools/template.py`
+   - Replace the placeholder logic with your implementation
+
+3. **Add documentation header**:
+   Every tool must have a header documenting:
+   - Name and description
+   - Usage and arguments
+   - Examples
+   - Exit codes
+
+4. **Make it executable**:
+   ```bash
+   chmod +x tools/your-tool.sh
+   ```
+
+5. **Test before using**:
+   ```bash
+   ./tools/your-tool.sh test-input
+   ```
+
+### Tool Security Rules
+
+- **Never hardcode credentials** - Use environment variables
+- **Validate all inputs** - Check arguments before using
+- **Limit scope** - Each tool should do one thing well
+- **Avoid destructive operations** - Require confirmation for dangerous actions
+
+### Tool Output Standards
+
+For agent consumption, prefer structured output:
+
+```bash
+# JSON (preferred for complex data)
+echo '{"status": "success", "result": 42}'
+
+# Plain text for simple values
+echo "42"
+```
+
+See `tools/README.md` for detailed documentation.
+
 ## Emergency Procedures
 
 ### Agent Conflict
