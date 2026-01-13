@@ -81,6 +81,7 @@ open-agents/
 | Coding | `agents/coding.md` | Implements features with verification, drives autonomous development | "implement next feature", "start coding", "build the [feature]", "continue development" |
 | Researcher | `agents/researcher.md` | Gathers information from web and documents, produces research articles | "research [topic]", "find information about", "summarize", "compare", "investigate" |
 | Transformer | `agents/transformer.md` | Converts content between formats (markdown to HTML, JSON to CSV, etc.) | "convert [file] to [format]", "transform", "export as", "reformat" |
+| Publisher | `agents/publisher.md` | Prepares and publishes final outputs to designated locations | "publish", "deploy", "distribute", "release", "finalize" |
 
 ## Routing Logic
 
@@ -96,6 +97,7 @@ When a user request comes in, use this logic to determine the appropriate agent:
 | Backlog | "add feature", "what should I work on", "feature status" | Project Assistant |
 | Research | "find", "search", "what is", "summarize", "research", "investigate" | Researcher |
 | Transformation | "convert", "transform", "export as", "reformat", "migrate format" | Transformer |
+| Publication | "publish", "deploy", "distribute", "release", "finalize" | Publisher |
 | Document | "write", "draft", "edit", "format" | Editor Agent |
 | Organization | "sort", "organize", "categorize", "file" | Organizer Agent |
 | Analysis | "analyze", "compare", "evaluate" | Analyst Agent |
