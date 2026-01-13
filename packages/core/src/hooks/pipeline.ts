@@ -4,7 +4,7 @@
  * Provides a fluent API for composing and executing hooks in a pipeline.
  */
 
-import type { HookContext, HookResult, HookHandler } from '../types/hooks.js';
+import type { HookContext, HookResult } from '../types/hooks.js';
 import { HookRegistry, type HookName, HOOK_NAMES } from './registry.js';
 
 // =============================================================================

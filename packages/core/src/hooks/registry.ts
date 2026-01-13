@@ -138,7 +138,7 @@ export class HookRegistry extends EventEmitter<HookRegistryEvents> {
     const category = this.getCategoryFromHookName(hookName);
     const fullMetadata: HookMetadata = { ...metadata, category };
 
-    const registration: HookRegistration<TInput, TOutput> = {
+    const registration: HookRegistration = {
       metadata: fullMetadata,
       handler: handler as HookHandler<unknown, unknown>,
       enabled: true,

@@ -5,7 +5,7 @@
  * Provides access to 300+ LLM models through a unified interface.
  */
 
-import OpenRouter from '@openrouter/sdk';
+import { OpenRouter } from '@openrouter/sdk';
 import type {
   Message,
   LLMResponse,
@@ -28,11 +28,11 @@ import {
 
 export interface OpenRouterConfig {
   apiKey: string;
-  baseURL?: string;
+  serverURL?: string;
   defaultModel?: string;
-  defaultHeaders?: Record<string, string>;
-  timeout?: number;
-  maxRetries?: number;
+  httpReferer?: string;
+  xTitle?: string;
+  timeoutMs?: number;
 }
 
 export interface CompletionOptions {
@@ -65,21 +65,16 @@ export class OpenRouterAdapter {
   constructor(config: OpenRouterConfig) {
     this.config = {
       defaultModel: 'anthropic/claude-sonnet-4',
-      maxRetries: 3,
-      timeout: 60000,
+      timeoutMs: 60000,
       ...config,
     };
 
     this.client = new OpenRouter({
       apiKey: this.config.apiKey,
-      baseURL: this.config.baseURL,
-      defaultHeaders: {
-        'HTTP-Referer': 'https://open-agent-system.dev',
-        'X-Title': 'Open Agent System',
-        ...this.config.defaultHeaders,
-      },
-      timeout: this.config.timeout,
-      maxRetries: this.config.maxRetries,
+      serverURL: this.config.serverURL,
+      httpReferer: this.config.httpReferer ?? 'https://open-agent-system.dev',
+      xTitle: this.config.xTitle ?? 'Open Agent System',
+      timeoutMs: this.config.timeoutMs,
     });
   }
 
@@ -124,8 +119,8 @@ export class OpenRouterAdapter {
       ? (modelResult.data as { selectedModel: string }).selectedModel
       : model;
 
-    // Make the API call
-    const response = await this.client.chat.completions.create({
+    // Make the API call using the new SDK API
+    const response = await this.client.chat.send({
       model: selectedModel,
       messages: transformedRequest.messages.map((m) => ({
         role: m.role as 'system' | 'user' | 'assistant',
@@ -141,18 +136,25 @@ export class OpenRouterAdapter {
         },
       })),
       temperature: transformedRequest.temperature,
-      max_tokens: transformedRequest.maxTokens,
+      maxTokens: transformedRequest.maxTokens,
     });
 
     // Parse the response
     const choice = response.choices[0];
+    const messageContent = choice?.message?.content;
+    const content = typeof messageContent === 'string'
+      ? messageContent
+      : (Array.isArray(messageContent)
+        ? messageContent.map(item => 'text' in item ? item.text : '').join('')
+        : '');
+
     const llmResponse: LLMResponse = {
       id: response.id,
       model: response.model,
-      content: choice?.message?.content ?? '',
-      toolCalls: this.parseToolCalls(choice?.message?.tool_calls),
+      content,
+      toolCalls: this.parseToolCalls(choice?.message?.toolCalls),
       usage: this.parseUsage(response.usage),
-      finishReason: choice?.finish_reason ?? 'stop',
+      finishReason: choice?.finishReason ?? 'stop',
     };
 
     // Execute response transform hook
@@ -202,7 +204,7 @@ export class OpenRouterAdapter {
       context
     );
 
-    const stream = await this.client.chat.completions.create({
+    const stream = await this.client.chat.send({
       model,
       messages: options.messages.map((m) => ({
         role: m.role as 'system' | 'user' | 'assistant',
@@ -218,7 +220,7 @@ export class OpenRouterAdapter {
         },
       })),
       temperature: options.temperature,
-      max_tokens: options.maxTokens,
+      maxTokens: options.maxTokens,
       stream: true,
     });
 
@@ -228,7 +230,7 @@ export class OpenRouterAdapter {
     try {
       for await (const chunk of stream) {
         const content = chunk.choices[0]?.delta?.content ?? '';
-        const isLast = chunk.choices[0]?.finish_reason !== null;
+        const isLast = chunk.choices[0]?.finishReason !== null;
 
         const streamChunk: StreamChunk = {
           id: chunk.id,
@@ -383,14 +385,14 @@ export class OpenRouterAdapter {
   }
 
   private parseUsage(usage?: {
-    prompt_tokens?: number;
-    completion_tokens?: number;
-    total_tokens?: number;
+    promptTokens?: number;
+    completionTokens?: number;
+    totalTokens?: number;
   }): TokenUsage {
     return {
-      promptTokens: usage?.prompt_tokens ?? 0,
-      completionTokens: usage?.completion_tokens ?? 0,
-      totalTokens: usage?.total_tokens ?? 0,
+      promptTokens: usage?.promptTokens ?? 0,
+      completionTokens: usage?.completionTokens ?? 0,
+      totalTokens: usage?.totalTokens ?? 0,
     };
   }
 }
