@@ -20,7 +20,7 @@ export const defaultApiKeyRotationHandler: HookHandler<
   ApiKeyRotationInput,
   ApiKeyRotationOutput
 > = async (input, _context): Promise<HookResult<ApiKeyRotationOutput>> => {
-  // Generate a simple new key (in production, use crypto)
+  // Generate a new key using cryptographically secure random values
   const newKey = generateApiKey(input.provider);
   const now = Date.now();
 
