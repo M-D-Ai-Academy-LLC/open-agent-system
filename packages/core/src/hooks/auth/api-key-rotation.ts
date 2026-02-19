@@ -20,7 +20,7 @@ export const defaultApiKeyRotationHandler: HookHandler<
   ApiKeyRotationInput,
   ApiKeyRotationOutput
 > = async (input, _context): Promise<HookResult<ApiKeyRotationOutput>> => {
-  // Generate a simple new key (in production, use crypto)
+  // Generate a new key using cryptographically secure random values
   const newKey = generateApiKey(input.provider);
   const now = Date.now();
 
@@ -36,15 +36,18 @@ export const defaultApiKeyRotationHandler: HookHandler<
 };
 
 /**
- * Generate a random API key
+ * Generate a random API key using cryptographically secure random values
  */
 function generateApiKey(provider: string): string {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   const prefix = provider.substring(0, 3).toLowerCase();
   let key = `${prefix}_`;
 
+  const randomBytes = new Uint8Array(32);
+  crypto.getRandomValues(randomBytes);
+
   for (let i = 0; i < 32; i++) {
-    key += chars.charAt(Math.floor(Math.random() * chars.length));
+    key += chars.charAt(randomBytes[i] % chars.length);
   }
 
   return key;
