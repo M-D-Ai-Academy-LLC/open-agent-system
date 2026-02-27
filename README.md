@@ -1,183 +1,334 @@
-# Open Agent System
+# open-agent-system
 
-A framework for building LLM-agnostic multi-agent systems — both as a conceptual pattern (markdown-based agent definitions) and a TypeScript implementation (50-hook extensibility system).
+![Maturity](https://img.shields.io/badge/maturity-Beta-yellow) ![Language](https://img.shields.io/badge/language-TypeScript-blue) ![GitHub stars](https://img.shields.io/github/stars/M-D-Ai-Academy-LLC/open-agent-system) ![GitHub issues](https://img.shields.io/github/issues/M-D-Ai-Academy-LLC/open-agent-system)
+
+> A framework for building LLM-agnostic multi-agent systems with 50 extensibility hooks
+
+**Organization:** [M-D-Ai-Academy-LLC](https://github.com/M-D-Ai-Academy-LLC)  
+**Language:** TypeScript  
+**Maturity:** Beta  
+**Category:** Education  
+**Target Market:** B2C
+
+
 
 ---
 
-> **For AI Agents:**
->
-> The file you're looking for is [`OpenAgentDefinition.md`](./OpenAgentDefinition.md).
-> Read that document to understand and implement the markdown-based agent pattern.
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Architecture](#architecture)
+- [Configuration](#configuration)
+- [API Reference](#api-reference)
+- [Contributing](#contributing)
+- [License](#license)
+- [Project Status](#project-status)
 
 ---
 
-## Two Approaches, One Vision
+## Overview
 
-### 1. The Conceptual Pattern (Zero Code)
+open-agent-system is tracked by the FutureTranz portfolio pipeline.
 
-Tools like **Claude Code**, **Gemini CLI**, and **Codex** aren't really "coding assistants." They're general-purpose agent frameworks that happen to be configured for coding by default. Their core capabilities — reading files, writing files, following instructions, using tools — work for *any* file-based workflow.
+A framework for building LLM-agnostic multi-agent systems with 50 extensibility hooks
 
-An **Open Agent System** is a folder structure and set of markdown files that reconfigures these tools to perform specialized, non-coding tasks. No code required.
+### Problem Statement
 
-See [`OpenAgentDefinition.md`](./OpenAgentDefinition.md) for the complete specification.
+Teams need consistent, auditable repository documentation and inventory data.
 
-### 2. The TypeScript Framework (Full Control)
+### Solution
 
-For developers who want programmatic control, the TypeScript packages provide:
+This repository is synchronized with portfolio metadata and generated documentation artifacts.
 
-- **🔌 50 Extensibility Hooks** — Complete control over request/response lifecycle
-- **🤖 Multi-Agent Orchestration** — Agents that collaborate, delegate, and communicate
-- **🔄 Provider Agnostic** — Works with any LLM via adapters
-- **🛡️ Security First** — PII detection, prompt injection protection, content moderation
-- **📊 Full Observability** — OpenTelemetry-native tracing and cost tracking
+---
 
-## Quick Start (TypeScript)
+## Features
+
+- Maintains open-agent-system metadata synchronized from Notion Projects Inventory V2.
+- Tracks operational and financial metrics in repository docs.
+- Publishes machine-readable catalog and inventory artifacts.
+- Keeps contribution and changelog files aligned with current status.
+
+---
+
+## Quick Start
 
 ```bash
-# Install globally
-npm install -g @open-agent/cli
-
-# Initialize a new project
-open-agent init my-project
-cd my-project
-
-# Configure your API key
-cp .env.example .env
-# Edit .env and add your OPENROUTER_API_KEY
-
-# Install dependencies
-pnpm install
-
-# Start chatting
-open-agent chat
+# Clone and run
+git clone <repo-url>
+cd <repo>
+# Follow project-specific setup in docs/ or README sections below
 ```
 
-## Quick Start (Markdown Pattern)
+---
 
-1. Read [`OpenAgentDefinition.md`](./OpenAgentDefinition.md) for the complete specification
-2. Create an `open-agents/` folder in your project
-3. Define your agents in markdown
-4. Point your tool's instruction file to `open-agents/INSTRUCTIONS.md`
+## Installation
 
-## Packages
+1. Clone the repository.
+2. Install dependencies documented in the repo.
+3. Run tests or checks before changes.
 
-| Package | Description |
-|---------|-------------|
-| `@open-agent/core` | Core framework with 50-hook system and types |
-| `@open-agent/cli` | Command-line interface |
-| `@open-agent/adapter-openrouter` | OpenRouter adapter (300+ models) |
+---
 
-## Hook System
+## Usage
 
-The hook system provides 50 extensibility points across 7 categories:
+See project scripts and source files in this repository.
 
-| Category | Hooks | Description |
-|----------|-------|-------------|
-| Gateway (#1-7) | Request/Response transform, Model selection, Provider routing, Fallback, Retry, Circuit breaker | Control the LLM request lifecycle |
-| Auth (#8-14) | API key validation/rotation, Permissions, Rate limits, Quotas, Sessions, Audit logs | Security and access control |
-| Tool Calling (#15-21) | Registration, Validation, Execution, Result transform, Error recovery, MCP discovery, Sandboxing | Tool/function calling |
-| Agent Lifecycle (#22-28) | Init, Spawn, Termination, State transitions, Message passing, Task delegation, Health checks | Multi-agent coordination |
-| Streaming (#29-35) | Start/Complete, Chunk processing, Error handling, Backpressure, Multiplexing, Partial results | Real-time streaming |
-| Observability (#36-42) | Metrics, Tracing, Span annotation, Log enrichment, Alerts, Cost tracking, Performance profiling | Monitoring and debugging |
-| Security (#43-50) | Input sanitization, Output filtering, PII detection, Prompt injection, Content moderation, Encryption, Compliance, Threat detection | Security guardrails |
-
-## Example: Custom Hook
-
-```typescript
-import { getHookRegistry, HOOK_NAMES } from '@open-agent/core';
-
-const registry = getHookRegistry();
-
-// Add cost alerting
-registry.register(
-  HOOK_NAMES.COST_TRACKING,
-  {
-    id: 'cost-alert',
-    name: 'Cost Alerting',
-    priority: 'normal',
-  },
-  async (input, context) => {
-    const { inputTokens, outputTokens } = input;
-    const cost = (inputTokens * 0.003 + outputTokens * 0.015) / 1000;
-
-    if (cost > 1.0) {
-      console.warn(`High cost request: $${cost.toFixed(2)}`);
-    }
-
-    return { success: true, data: { cost, currency: 'USD' } };
-  }
-);
-```
+---
 
 ## Architecture
 
+Repository structure snapshot:
+
 ```
-┌─────────────────────────────────────────────────────────┐
-│                    Your Application                      │
-├─────────────────────────────────────────────────────────┤
-│                    @open-agent/core                      │
-│  ┌───────────────────────────────────────────────────┐  │
-│  │              Hook Pipeline System                  │  │
-│  │  Gateway → Auth → Tools → Agent → Stream → Obs    │  │
-│  └───────────────────────────────────────────────────┘  │
-├─────────────────────────────────────────────────────────┤
-│                      Adapters                            │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌────────┐  │
-│  │OpenRouter│  │  OpenAI  │  │Anthropic │  │ Custom │  │
-│  └──────────┘  └──────────┘  └──────────┘  └────────┘  │
-├─────────────────────────────────────────────────────────┤
-│                    LLM Providers                         │
-│  Claude • GPT-4 • Gemini • Llama • Mistral • 300+ more  │
-└─────────────────────────────────────────────────────────┘
+./
+  .agent.lock
+  .claude_assistant_settings.json
+  .claude_settings.json
+  .gitignore
+  .gitmodules
+  .prettierrc
+  AGENTS.md
+  CLAUDE.md
+  CONTRIBUTING.md
+  GEMINI.md
+  INVENTORY.yaml
+  LICENSE
+  OpenAgentDefinition.md
+  README.md
+  claude-progress.txt
+  package.json
+  pnpm-lock.yaml
+  pnpm-workspace.yaml
+  tsconfig.json
+  turbo.json
+  typedoc.json
+  vitest.config.ts
+open-agents/
+  INSTRUCTIONS.md
+  README.md
+open-agents/tools/
+  .gitkeep
+  README.md
+  template.py
+  template.sh
+open-agents/output-refined/
+  .gitkeep
+  README.md
+open-agents/source/
+  .gitkeep
+  README.md
+  example-research.stub.md
+  example-summary.stub.md
+  template.request.md
+  template.stub.md
+open-agents/agents/
+  .gitkeep
+  coding.md
+  initializer.md
+  project-assistant.md
+  publisher.md
+  researcher.md
+  reviewer.md
+  transformer.md
+open-agents/output-drafts/
+  .gitkeep
+  README.md
+open-agents/output-final/
+  .gitkeep
+  README.md
+.gemini/
+.gemini/commands/
+  .gitkeep
+.gemini/commands/agents/
+  .gitkeep
+  code.md
+  init.md
+  list.md
+  status.md
+test/
+  mocks.ts
+  setup.ts
+  utils.ts
+.claude/
+.claude/commands/
+  .gitkeep
+.claude/commands/agents/
+  .gitkeep
+  chain.md
+  code.md
+  init.md
+  list.md
+  publish.md
+  research.md
+  review.md
+  status.md
+  transform.md
+ai-dev-tasks/
+docs/
+docs/catalog/
+  M-D-Ai-Academy-LLC-open-agent-system-catalog.json
+examples/
+examples/history-research/
+  CLAUDE.md
+  GEMINI.md
+  README.md
+examples/history-research/open-agents/
+  INSTRUCTIONS.md
+  README.md
+examples/history-research/.gemini/
+examples/history-research/.claude/
+examples/content-pipeline/
+  CLAUDE.md
+  GEMINI.md
+  README.md
+examples/content-pipeline/open-agents/
+  INSTRUCTIONS.md
+  README.md
+examples/content-pipeline/.gemini/
+examples/content-pipeline/.claude/
+packages/
+packages/core/
+  package.json
+  tsconfig.json
+packages/core/tests/
+packages/core/src/
+  index.ts
+packages/mcp-server/
+  README.md
+  package.json
+  tsconfig.json
+packages/mcp-server/src/
+  cli.ts
+  index.ts
+  protocol.ts
+  server.ts
+  tool-registry.ts
+  transport.ts
+  types.ts
+packages/cli/
+  package.json
+  tsconfig.json
+packages/cli/src/
+  bin.ts
+  index.ts
+packages/adapters/
+packages/adapters/openrouter/
+  package.json
+  tsconfig.json
+packages/adapters/anthropic/
+  README.md
+  package.json
+  tsconfig.json
+packages/adapters/openai/
+  README.md
+  package.json
+  tsconfig.json
+packages/mcp-client/
+  README.md
+  package.json
+  tsconfig.json
+packages/mcp-client/src/
+  client.ts
+  index.ts
+  pool.ts
+  transport.ts
+  types.ts
+.github/
+.github/workflows/
+  ci.yml
+  pr-checks.yml
+  release.yml
+prompts/
+  app_spec.txt
+  coding_prompt.md
+  coding_prompt_yolo.md
+  initializer_prompt.md
+.git/
+  FETCH_HEAD
+  HEAD
+  config
+  description
+  index
+  packed-refs
+.git/objects/
+.git/objects/pack/
+  pack-1e9734288c808929b22c34e35ac12a47e793670f.idx
+  pack-1e9734288c808929b22c34e35ac12a47e793670f.pack
+  pack-1e9734288c808929b22c34e35ac12a47e793670f.rev
+.git/objects/info/
+.git/info/
+  exclude
+.git/logs/
+  HEAD
+.git/logs/refs/
+.git/hooks/
+  applypatch-msg.sample
+  commit-msg.sample
+  fsmonitor-watchman.sample
+  post-update.sample
+  pre-applypatch.sample
+  pre-commit.sample
+  pre-merge-commit.sample
+  pre-push.sample
+  pre-rebase.sample
+  pre-receive.sample
+  prepare-commit-msg.sample
+  push-to-checkout.sample
+  sendemail-validate.sample
+  update.sample
+.git/refs/
+.git/refs/heads/
+  main
+  victor
+.git/refs/tags/
+.git/refs/remotes/
 ```
-
-## Development
-
-```bash
-# Clone the repository
-git clone https://github.com/open-agent-system/open-agent-system.git
-cd open-agent-system
-
-# Install dependencies
-pnpm install
-
-# Build all packages
-pnpm build
-
-# Run tests
-pnpm test
-```
-
-## Roadmap
-
-### v0.1.0 (Current)
-- [x] Core hook system with 50 hooks
-- [x] CLI scaffolding
-- [x] OpenRouter adapter
-- [x] TypeScript types
-
-### v0.2.0
-- [ ] Full agent runtime
-- [ ] Tool execution framework
-- [ ] MCP server/client integration
-
-### v0.3.0
-- [ ] Multi-agent orchestration
-- [ ] Workflow DSL
-- [ ] Web dashboard
-
-## Example Use Cases
-
-- **Research systems** — Agents that research topics, produce articles, transform to HTML
-- **Content pipelines** — Ingest raw notes, process through multiple stages, output polished content
-- **Data processing** — Extract, transform, validate data across file formats
-- **Customer support** — Intelligent routing, response generation, escalation handling
-- **Code review** — Automated analysis, security scanning, style enforcement
-
-## License
-
-MIT License. See [LICENSE](./LICENSE) for details.
 
 ---
 
-*This is an experiment. Fork it, break it, improve it.*
+## Configuration
+
+Use environment variables documented by the project. Do not commit secrets.
+
+---
+
+## API Reference
+
+See source code and existing docs for endpoints and interfaces.
+
+---
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development guidelines.
+
+---
+
+## License
+
+See LICENSE file in this repository (or project default if absent).
+
+---
+
+## Project Status
+
+| Metric | Value |
+|--------|-------|
+| Maturity | Beta |
+| Activity Score | 55.0 |
+| Stars | 1.0 |
+| Contributors | 3.0 |
+| Open Issues | 0 |
+| Last Activity | 2026-02-19 |
+| Velocity | High |
+
+
+
+---
+
+<sub>Auto-generated by [FutureTranz Portfolio Pipeline](https://github.com/FutureTranz-Inc/github-portfolio-tracker) — synced from Notion Projects Inventory V2 on 2026-02-27</sub>

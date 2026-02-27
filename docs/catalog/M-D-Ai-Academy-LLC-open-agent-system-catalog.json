@@ -1,0 +1,66 @@
+{
+  "schema_version": "2.0",
+  "generated_at": "2026-02-27T08:51:43Z",
+  "source": "notion-projects-inventory-v2",
+  "project": {
+    "name": "open-agent-system",
+    "organization": "M-D-Ai-Academy-LLC",
+    "description": "A framework for building LLM-agnostic multi-agent systems with 50 extensibility hooks",
+    "github_url": "https://github.com/M-D-Ai-Academy-LLC/open-agent-system",
+    "primary_language": "TypeScript",
+    "category": [
+      "Education"
+    ],
+    "maturity": "Beta",
+    "target_market": "B2C",
+    "team_effort": "Small Team (2-5)",
+    "public": true
+  },
+  "metrics": {
+    "stars": 1.0,
+    "contributors": 3.0,
+    "open_issues": 0,
+    "activity_score": 55.0,
+    "complexity_score": 3.0,
+    "velocity_rating": "High",
+    "hours_invested": 404.0,
+    "last_activity": "2026-02-19"
+  },
+  "financials": {
+    "revenue_model": [
+      "Training/Education",
+      "SaaS Subscription"
+    ],
+    "revenue_tier": "Tier 3 ($100K-$500K)",
+    "est_monthly_income": 844.0,
+    "est_annual_income": 10128.0,
+    "annual_revenue_potential": 200000.0,
+    "labor_cost": 120600.0,
+    "roi_ratio": 0.08,
+    "gross_margin_pct": 0.8,
+    "ltv_cac_ratio": 12.28,
+    "payback_period_months": 142.89,
+    "tam_usd": 8000000000.0,
+    "sam_usd": 800000000.0,
+    "som_usd": 4000000.0
+  },
+  "strategy": {
+    "buyer_persona": "TBD",
+    "competitive_advantage": "",
+    "competitors": "",
+    "defensibility_moat": "TBD",
+    "gtm_motion": "PLG (Product-Led Growth)",
+    "pricing_model": "Monthly/Annual SaaS subscription",
+    "investment_thesis": "open-agent-system solves low issues for TBD in a $10000M market by TBD.",
+    "investor_narrative": "TBD",
+    "next_milestone": "PRD: docs/prd/catalog/M-D-Ai-Academy-LLC-open-agent-system-prd.md | BP: docs/bp/catalog/M-D-Ai-Academy-LLC-open-agent-system-bp.md"
+  },
+  "risk": {
+    "execution_risk": "Medium",
+    "regulatory_risk": "Medium",
+    "problem_severity": "Low",
+    "income_confidence": "High",
+    "capital_efficiency_rating": "High",
+    "funding_readiness_score": 85.0
+  }
+}
